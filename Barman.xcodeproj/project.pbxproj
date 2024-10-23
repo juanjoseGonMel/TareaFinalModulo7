@@ -14,6 +14,8 @@
 		866C2D112CC8FB820057C80E /* Barman.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 866C2D0F2CC8FB820057C80E /* Barman.xcdatamodeld */; };
 		866C2D132CC8FB840057C80E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 866C2D122CC8FB840057C80E /* Assets.xcassets */; };
 		866C2D162CC8FB840057C80E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 866C2D142CC8FB840057C80E /* LaunchScreen.storyboard */; };
+		866C2D1F2CC8FD2C0057C80E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866C2D1E2CC8FD2C0057C80E /* WebKit.framework */; };
+		866C2D212CC8FD3B0057C80E /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866C2D202CC8FD3B0057C80E /* Network.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		866C2D122CC8FB840057C80E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		866C2D152CC8FB840057C80E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		866C2D172CC8FB840057C80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		866C2D1E2CC8FD2C0057C80E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		866C2D202CC8FD3B0057C80E /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				866C2D1F2CC8FD2C0057C80E /* WebKit.framework in Frameworks */,
+				866C2D212CC8FD3B0057C80E /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,7 @@
 			children = (
 				866C2D052CC8FB820057C80E /* Barman */,
 				866C2D042CC8FB820057C80E /* Products */,
+				866C2D1D2CC8FD2B0057C80E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +75,15 @@
 				866C2D0F2CC8FB820057C80E /* Barman.xcdatamodeld */,
 			);
 			path = Barman;
+			sourceTree = "<group>";
+		};
+		866C2D1D2CC8FD2B0057C80E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				866C2D202CC8FD3B0057C80E /* Network.framework */,
+				866C2D1E2CC8FD2C0057C80E /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +310,8 @@
 				DEVELOPMENT_TEAM = VX96HPJ359;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Barman/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Barman;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -322,6 +340,8 @@
 				DEVELOPMENT_TEAM = VX96HPJ359;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Barman/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Barman;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
