@@ -33,9 +33,10 @@ class DrinkViewModel {
         let ud = UserDefaults.standard
         if ud.integer(forKey: "BD-OK") != 1 {  // La base de datos no se ha descargado
             if InternetMonitor.shared.hayConexion {
-                if let laURL = URL(string: "https://my.api.mockaroo.com/mascotas.json?key=ee082920") {
+                if let laURL = URL(string: "http://janzelaznog.com/DDAM/iOS/drinks.json") {
                     let sesion = URLSession(configuration: .default)
                     let tarea = sesion.dataTask(with:URLRequest(url:laURL)) { data, response, error in
+                        print("Entrando al bloque de URLSession Task")
                         if error != nil {  // let _ = error (MUY swifty)
                             // algo salió mal
                             print ("no se pudo descargar el feed de mascotas \(error?.localizedDescription ?? "")")
@@ -44,10 +45,12 @@ class DrinkViewModel {
                         // llenar la base de datos
                         do {
                             let tmp = try JSONSerialization.jsonObject(with: data!) as! [[String:Any]]
-                            self.guardaBebidas (tmp)
+                            print("Datos JSON: \(tmp)")
+                            self.guardaBebidas(tmp)
+                            ud.set(1, forKey:"BD-OK")
                         }
                         catch { print ("no se obtuvo un JSON en la respuesta") }
-                        ud.set(1, forKey:"BD-OK")
+                        
                     }
                     tarea.resume()
                 }
@@ -56,17 +59,35 @@ class DrinkViewModel {
     }
     
     func guardaBebidas(_ arregloJSON:[[String:Any]]) {
-        guard let entidadDesc = NSEntityDescription.entity(forEntityName:"Drinks", in:persistentContainer.viewContext)
+        guard let entidadDesc = NSEntityDescription.entity(forEntityName:"Drinks", in:context)
         else { return }
         for dict in arregloJSON {
             // 1. crear un objeto Mascota
-            let m = NSManagedObject(entity: entidadDesc, insertInto: persistentContainer.viewContext) as! Drinks
+            let b = NSManagedObject(entity: entidadDesc, insertInto: context) as! Drinks
             // 2. setear las properties del objeto, con los datos del dict
-            m.inicializaCon(dict)
+            b.inicializaCon(dict)
         }
         // 3. salvar el objeto
         saveContext()
     }
+    
+    func guardaBebida(name: String, ingredients: String, instructions: String){
+        guard let entidadDesc = NSEntityDescription.entity(forEntityName:"Drinks", in:context)
+        else { return }
+        // 1. crear un objeto Mascota
+        let b = NSManagedObject(entity: entidadDesc, insertInto: context) as! Drinks
+        // 2. setear las properties del objeto, con los datos del dict
+        b.name = name
+        b.ingredients = ingredients
+        b.directions = instructions
+        b.img = ""
+        // 3. salvar el objeto
+        saveContext()
+        
+    }
+        
+    
+    /*
     
     private func downloadDefaultDrinks(completion: @escaping () -> Void) {
         guard let url = URL(string: "http://janzelaznog.com/DDAM/iOS/drinks.json") else { return }
@@ -137,7 +158,7 @@ class DrinkViewModel {
         newDrink.img = image
         saveContext()
         loadDrinks(completion: completion)
-    }
+    }*/
     
     private func saveContext() {
         DataManager.shared.saveContext()

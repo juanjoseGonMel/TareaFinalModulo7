@@ -14,16 +14,40 @@ class InternetMonitor:NSObject {
     var hayConexion = false
     var tipoConexionWiFi = false
     private var monitor = NWPathMonitor()
+    private var monitorQueue = DispatchQueue(label: "InternetMonitorQueue")
     
     private override init() {
         super.init()
+        setupMonitor()
         // que debe de hacer cuando cambie el estado de la conexion...
-        self.monitor.pathUpdateHandler = { ruta in
+        
+    }
+    
+    private func setupMonitor() {
+        monitor.pathUpdateHandler = { [weak self] ruta in
+            guard let self = self else { return }
             self.hayConexion = ruta.status == .satisfied
             self.tipoConexionWiFi = ruta.usesInterfaceType(.wifi)
+            
+            if self.hayConexion {
+                print("Conectado a Internet")
+                if self.tipoConexionWiFi {
+                    print("Conectado a WiFi")
+                } else {
+                    print("Conectado a otra red")
+                }
+            } else {
+                print("Sin conexión a Internet")
+            }
+            
+            NotificationCenter.default.post(name: .networkStatusChanged, object: nil)
         }
-        // para que comienze a revisar si hay cambios...
-        // los procesos que pueden tomar mucho tiempo o muchos recursos se DEBEN mandar a background
-        monitor.start(queue:DispatchQueue.global(qos: .background))
+        monitor.start(queue: monitorQueue)
     }
+}
+
+
+// Extensión para la notificación
+extension Notification.Name {
+    static let networkStatusChanged = Notification.Name("networkStatusChanged")
 }

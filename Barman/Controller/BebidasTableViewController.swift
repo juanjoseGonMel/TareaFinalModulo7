@@ -10,23 +10,25 @@ import UIKit
 class BebidasTableViewController: UITableViewController {
     var bebidas = [Drinks]()
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        NotificationCenter.default
+            .addObserver(self, selector: #selector(mostrarTabla), name: NSNotification.Name(rawValue: "BD_LISTA"), object: nil)
     }
     
+    /*
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bebidas = DrinkViewModel.shared.cargaBebidas()
         NotificationCenter.default.addObserver(self, selector:#selector(mostrarTabla), name:NSNotification.Name(rawValue:"BD_LISTA"), object:nil)
-    }
+    }*/
+    
+        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mostrarTabla()}
+        
+    
     
     @objc func mostrarTabla() {
         bebidas = DrinkViewModel.shared.cargaBebidas()
@@ -65,15 +67,19 @@ class BebidasTableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        let destino = segue.destination as! DetailViewController
-        // Pass the selected object to the new view controller.
         
         if segue.identifier == "showDetail" {
-            destino.laBebida = sender as? Drinks
-        } else if segue.identifier == "addNew" {
-            destino.laBebida = nil
+            if let send = sender as? Drinks {
+                let detailVC = segue.destination as! DetailViewController
+                detailVC.laBebida = send
+            }
+        } else if segue.identifier == "agregarBebida" {
+            let detailVC = segue.destination as! NewBebidasViewController
+            detailVC.laBebida = nil
         }
+        
+        
+        
     }
 
 

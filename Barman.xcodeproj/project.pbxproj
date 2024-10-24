@@ -25,6 +25,7 @@
 		866C2D322CC92AA10057C80E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866C2D312CC92AA10057C80E /* DetailViewController.swift */; };
 		866C2D342CC939680057C80E /* BebidasDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866C2D332CC939680057C80E /* BebidasDetailView.swift */; };
 		866C2D362CC939A00057C80E /* NewBebidaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866C2D352CC939A00057C80E /* NewBebidaDetailView.swift */; };
+		866C2D382CCA08330057C80E /* NewBebidasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866C2D372CCA08330057C80E /* NewBebidasViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		866C2D312CC92AA10057C80E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		866C2D332CC939680057C80E /* BebidasDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BebidasDetailView.swift; sourceTree = "<group>"; };
 		866C2D352CC939A00057C80E /* NewBebidaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBebidaDetailView.swift; sourceTree = "<group>"; };
+		866C2D372CCA08330057C80E /* NewBebidasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBebidasViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				866C2D2D2CC90B900057C80E /* DrinkViewModel.swift */,
 				866C2D2F2CC9279B0057C80E /* BebidasTableViewController.swift */,
 				866C2D312CC92AA10057C80E /* DetailViewController.swift */,
+				866C2D372CCA08330057C80E /* NewBebidasViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			files = (
 				866C2D322CC92AA10057C80E /* DetailViewController.swift in Sources */,
 				866C2D302CC9279B0057C80E /* BebidasTableViewController.swift in Sources */,
+				866C2D382CCA08330057C80E /* NewBebidasViewController.swift in Sources */,
 				866C2D112CC8FB820057C80E /* Barman.xcdatamodeld in Sources */,
 				866C2D2E2CC90B900057C80E /* DrinkViewModel.swift in Sources */,
 				866C2D2C2CC90AAE0057C80E /* InternetMonitor.swift in Sources */,

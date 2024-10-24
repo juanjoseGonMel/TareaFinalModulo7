@@ -17,9 +17,12 @@ class ViewController: UIViewController {
 
 }
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+/*
+class ViewController: UIViewController {
     
-    @I
+    
+    
 
 class TableViewController: UITableViewController {
     var mascotas = [Mascota]()
@@ -69,4 +72,4 @@ class TableViewController: UITableViewController {
 
 }
 
-
+*/
