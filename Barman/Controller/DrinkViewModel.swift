@@ -105,7 +105,7 @@ class DrinkViewModel {
         guard let documentsDirectory = urls.first else { return nil }
         
         let fileURL = documentsDirectory.appendingPathComponent(fileName)
-        
+        print(fileURL)
         // Verificar si la imagen existe
         if fileManager.fileExists(atPath: fileURL.path) {
             // Cargar la imagen y devolverla

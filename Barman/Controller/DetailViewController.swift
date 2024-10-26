@@ -93,7 +93,8 @@ class DetailViewController: UIViewController {
     
     func configureLabel(_ label: UILabel) {
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 4
+        label.numberOfLines = 0
+        label.sizeToFit()
         
     }
     
