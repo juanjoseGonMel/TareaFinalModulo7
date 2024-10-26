@@ -8,14 +8,28 @@
 import Foundation
 import UIKit
 
-class NewBebidasViewController: UIViewController {
+class NewBebidasViewController: UIViewController,  UITextFieldDelegate  {
     
     var laBebida : Drinks?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        BNombre.delegate = self
+        BIngredientes.delegate = self
+        BInstrucciones.delegate = self
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() 
+        return true
+    }
     
     
     @IBOutlet var BNombre: UITextField!
@@ -36,6 +50,7 @@ class NewBebidasViewController: UIViewController {
             return
         }
         DrinkViewModel.shared.guardaBebida(name: nombre, ingredients: ingredientes, instructions: instrucciones)
+        self.dismiss(animated: true, completion: nil)
     }
     
         

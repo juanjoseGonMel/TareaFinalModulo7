@@ -12,8 +12,7 @@ class BebidasTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(mostrarTabla), name: NSNotification.Name(rawValue: "BD_LISTA"), object: nil)
+       // NotificationCenter.default.addObserver(self, selector: #selector(mostrarTabla), name: NSNotification.Name(rawValue: "BD_LISTA"), object: nil)
     }
     
     /*
@@ -26,7 +25,8 @@ class BebidasTableViewController: UITableViewController {
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mostrarTabla()}
+        mostrarTabla()
+    }
         
     
     
@@ -40,6 +40,7 @@ class BebidasTableViewController: UITableViewController {
     
     
     @IBAction func AgregarBebidabtn(_ sender: Any) {
+        
         performSegue(withIdentifier: "agregarBebida", sender: nil)
     }
     
@@ -62,8 +63,12 @@ class BebidasTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let b = bebidas[indexPath.row]
-        performSegue(withIdentifier:"detail", sender:b)
+        print("didSelectRowAt ejecutado - Bebida seleccionada: \(b.name ?? "Sin nombre")")
+            
+        performSegue(withIdentifier:"showDetail", sender:b)
+        print("se pusho una row")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -71,16 +76,21 @@ class BebidasTableViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let send = sender as? Drinks {
                 let detailVC = segue.destination as! DetailViewController
+                print("Preparando segue para DetailViewController con bebida: \(send.name ?? "Sin nombre")")
+                detailVC.modalPresentationStyle = .fullScreen
                 detailVC.laBebida = send
+                print(send.img ?? "nill")
             }
         } else if segue.identifier == "agregarBebida" {
             let detailVC = segue.destination as! NewBebidasViewController
             detailVC.laBebida = nil
         }
         
-        
-        
     }
+    /*
+    override func didMove(toParent parent: UIViewController?) {
+        isSegueInProgress = false
+    }*/
 
 
 }

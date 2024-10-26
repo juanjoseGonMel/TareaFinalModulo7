@@ -85,6 +85,99 @@ class DrinkViewModel {
         saveContext()
         
     }
+    
+    func cargaImagen (fileName: String) -> UIImage? {
+        //if let laUrl = URL(string: "http://janzelaznog.com/DDAM/iOS/drinksimages/1.jpg"){
+        
+        // Para abrir en el dispositivo
+        /*if UIApplication.shared.canOpenURL(laUrl){
+         UIApplication.shared.open(laUrl)
+         }*/
+        
+        
+        // Para mostrar contenido en mi app via WKWebView
+        //let elRequest = URLRequest(url: laUrl)
+        //webView.load(elRequest)
+        //guardaImagen(laUrl)
+        //}
+        let fileManager = FileManager.default
+        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+        guard let documentsDirectory = urls.first else { return nil }
+        
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        
+        // Verificar si la imagen existe
+        if fileManager.fileExists(atPath: fileURL.path) {
+            // Cargar la imagen y devolverla
+            return UIImage(contentsOfFile: fileURL.path)
+        } else {
+            return nil
+        }
+    }
+    
+    func guardaImagen (from url: URL, imgname: String) {
+        
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error al descargar la imagen: \(String(describing: error))")
+                return
+            }
+            // Guardar la imagen en el directorio Documents
+            self.saveImageToDocuments(data: data, fileName: imgname)
+            
+            // Cargar la imagen recién descargada
+            /*
+            DispatchQueue.main.async {
+                if let image = UIImage(data: data) {
+                    self.ImgBebida.image = image
+                }
+            }*/
+        }
+        task.resume()
+        
+        
+        
+        /*
+         if let urlDocumentos = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask).first {
+         let urlDelArchivo = urlDocumentos.appending(component:unaURL.lastPathComponent)
+         // comprobar si un archivo ya existe, para no descargarlo dos veces
+         if !FileManager.default.fileExists(atPath: urlDelArchivo.path) {
+         let sesion = URLSession(configuration: .default)
+         let tarea = sesion.dataTask(with:URLRequest(url: unaURL)) { data, response, error in
+         if error != nil {  // let _ = error (MUY swifty)
+         // algo salió mal
+         print ("no se pudo descargar la imagen \(error?.localizedDescription ?? "")")
+         return
+         }
+         // obtener la url de documents:
+         do {
+         try data?.write(to: urlDelArchivo)
+         } catch {
+         print ("no se pudo guardar la imagen")
+         }
+         }
+         tarea.resume()
+         }
+         }
+         
+         */
+    }
+    
+    func saveImageToDocuments(data: Data, fileName: String) {
+            let fileManager = FileManager.default
+            let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+            guard let documentsDirectory = urls.first else { return }
+            
+            let fileURL = documentsDirectory.appendingPathComponent(fileName)
+            
+            do {
+                try data.write(to: fileURL)
+                print("Imagen guardada en: \(fileURL.path)")
+            } catch {
+                print("Error al guardar la imagen: \(error)")
+            }
+        }
         
     
     /*
